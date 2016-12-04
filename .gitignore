@@ -1,9 +1,2 @@
-LaurelIDParse/bin/Debug/LINQtoCSV.dll
-LaurelIDParse/bin/Debug/IdParser.pdb
-LaurelIDParse/bin/Debug/LaurelIDParse.vshost.exe
-LaurelIDParse/bin/Debug/LaurelIDParse.vshost.exe.manifest
-LaurelIDParse/bin/Debug/IdParser.dll
-LaurelIDParse/bin/Debug/LaurelIDParse.vshost.exe.config
-LaurelIDParse/bin/Debug/LaurelIDParse.exe
-LaurelIDParse/bin/Debug/LaurelIDParse.pdb
-LaurelIDParse/bin/Debug/LaurelIDParse.exe.config
+LaurelIDParse/bin/
+LaurelIDParse/obj/
