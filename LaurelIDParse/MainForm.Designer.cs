@@ -34,6 +34,7 @@
             this.btnClearList = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnScan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             this.btnClearList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClearList.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearList.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClearList.Location = new System.Drawing.Point(12, 11);
+            this.btnClearList.Location = new System.Drawing.Point(144, 12);
             this.btnClearList.Name = "btnClearList";
             this.btnClearList.Size = new System.Drawing.Size(126, 40);
             this.btnClearList.TabIndex = 5;
@@ -84,18 +85,36 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 11);
+            this.textBox1.Location = new System.Drawing.Point(504, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(176, 20);
             this.textBox1.TabIndex = 7;
+            this.textBox1.Visible = false;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // btnScan
+            // 
+            this.btnScan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnScan.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnScan.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScan.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnScan.Location = new System.Drawing.Point(12, 12);
+            this.btnScan.Name = "btnScan";
+            this.btnScan.Size = new System.Drawing.Size(126, 40);
+            this.btnScan.TabIndex = 8;
+            this.btnScan.Text = "Scan ID";
+            this.btnScan.UseVisualStyleBackColor = false;
+            this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 492);
+            this.Controls.Add(this.btnScan);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnClearList);
             this.Controls.Add(this.btnCSV);
@@ -117,6 +136,7 @@
         private System.Windows.Forms.Button btnClearList;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnScan;
     }
 }
 

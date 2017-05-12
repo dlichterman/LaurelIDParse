@@ -1,4 +1,5 @@
 ﻿using IdParser;
+using LINQtoCSV;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -48,10 +49,10 @@ namespace LaurelIDParse
 
                 IdParser.IdentificationCard idCard = IdParser.IdParser.Parse(s);
                 l.FIRST_NAME = idCard.FirstName;
-                l.MIDDLE_INITIAL = idCard.MiddleName;
-                l.LAST_NAME = idCard.LastName;
-                l.LAST_NAME = idCard.LastName;
-                l.LAST_NAME = idCard.LastName;
+                if (idCard.MiddleName != "NONE")
+                {
+                    l.MIDDLE_INITIAL = idCard.MiddleName.Substring(0, 1);
+                }
                 l.LAST_NAME = idCard.LastName;
                 l.NAME_SUFFIX = idCard.NameSuffix;
                 l.STREET_ADDRESS = (idCard.StreetLine1 + ' ' + idCard.StreetLine2).Trim();
@@ -59,10 +60,10 @@ namespace LaurelIDParse
                 l.CITY = idCard.City;
                 l.STATE = idCard.JurisdictionCode;
                 l.ZIP_CODE = idCard.PostalCode;
-                l.FRN = "";
-                l.SSN = "";
-                l.E_MAIL = "";
-                l.TELEPHONE = "";
+                l.FRN = null;
+                l.SSN = null;
+                l.E_MAIL = null;
+                l.TELEPHONE = null;
 
                 bool updated = false;
                 //look for a match on the name first and ask about updating
@@ -74,10 +75,7 @@ namespace LaurelIDParse
                         if (dr == DialogResult.Yes)
                         {
                             ll.FIRST_NAME = idCard.FirstName;
-                            ll.MIDDLE_INITIAL = idCard.MiddleName;
-                            ll.LAST_NAME = idCard.LastName;
-                            ll.LAST_NAME = idCard.LastName;
-                            ll.LAST_NAME = idCard.LastName;
+                            ll.MIDDLE_INITIAL = idCard.MiddleName.Substring(0,1);
                             ll.LAST_NAME = idCard.LastName;
                             ll.NAME_SUFFIX = idCard.NameSuffix;
                             ll.STREET_ADDRESS = (idCard.StreetLine1 + ' ' + idCard.StreetLine2).Trim();
@@ -107,12 +105,23 @@ namespace LaurelIDParse
             }
         }
 
+        private void SaveCSV(string filename)
+        {
+            CsvContext cc = new CsvContext();
+            CsvFileDescription c = new CsvFileDescription();
+            c.QuoteAllFields = false;
+            cc.Write<LaurelFormat>(lst, filename,c);
+            
+
+
+
+        }
+
         private void btnCSV_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                LINQtoCSV.CsvContext cc = new LINQtoCSV.CsvContext();
-                cc.Write<LaurelFormat>(lst, saveFileDialog1.FileName);
+                SaveCSV(saveFileDialog1.FileName);
             }
         }
 
@@ -126,7 +135,7 @@ namespace LaurelIDParse
             lst.Clear();
             if(File.Exists("save.csv"))
             {
-                LINQtoCSV.CsvContext cc = new LINQtoCSV.CsvContext();
+                CsvContext cc = new CsvContext();
                 var q = cc.Read<LaurelFormat>("save.csv").ToList();
                 foreach(LaurelFormat qq in q)
                 {
@@ -138,8 +147,7 @@ namespace LaurelIDParse
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            LINQtoCSV.CsvContext cc = new LINQtoCSV.CsvContext();
-            cc.Write<LaurelFormat>(lst, "save.csv");
+            SaveCSV("save.csv");
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -148,6 +156,16 @@ namespace LaurelIDParse
             {
                 ParseText(textBox1.Lines);
                 textBox1.Text = "";
+            }
+        }
+
+        private void btnScan_Click(object sender, EventArgs e)
+        {
+            InputForm i = new InputForm();
+            i.ShowDialog();
+            if(i.DialogResult == DialogResult.OK)
+            {
+                ParseText(i.lines);
             }
         }
     }
